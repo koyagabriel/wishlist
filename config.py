@@ -19,6 +19,9 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    Config.MONGODB_SETTINGS.update({
+        'db': os.environ.get('TEST_DATABASE')
+    })
 
 
 class ProductionConfig(Config):
