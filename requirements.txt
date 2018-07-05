@@ -4,3 +4,4 @@ mongoengine==0.15.0
 flask-mongoengine==0.9.5
 python-dotenv==0.7.1
 pytest==3.5.0
+factory_boy
