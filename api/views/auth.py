@@ -13,7 +13,7 @@ class Auth:
 
 
     @staticmethod
-    def _verify_token(token):
+    def verify_token(token):
         serializer = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = serializer.loads(token)
