@@ -7,23 +7,24 @@ load_dotenv(dotenv_path)
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     ENV = os.environ.get('ENV')
+
+class DevelopmentConfig(Config):
     MONGODB_SETTINGS = {
         'host': os.environ.get('HOST'),
         'port': int(os.environ.get('PORT')),
+        'db': os.environ.get('DEV_DATABASE'),
         'maxPoolSize': 200
     }
 
-class DevelopmentConfig(Config):
-    Config.MONGODB_SETTINGS.update({
-        'db': os.environ.get('DEV_DATABASE')
-    })
 
 class TestingConfig(Config):
     TESTING = True
-    Config.MONGODB_SETTINGS.update({
-        'db': os.environ.get('TEST_DATABASE')
-    })
-
+    MONGODB_SETTINGS = {
+        'host': os.environ.get('HOST'),
+        'port': int(os.environ.get('PORT')),
+        'db': os.environ.get('TEST_DATABASE'),
+        'maxPoolSize': 200
+    }
 
 class ProductionConfig(Config):
     pass

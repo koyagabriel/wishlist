@@ -1,7 +1,6 @@
 import unittest
 import json
 from flask import current_app
-from base64 import b64encode
 from app import create_app, db
 
 class BaseTestCase(unittest.TestCase):
@@ -18,16 +17,17 @@ class BaseTestCase(unittest.TestCase):
         self.app_context.pop()
 
 
-    def get_api_headers(self):
+    def get_api_headers(self, token):
         return {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
         }
 
-    def make_request(self, method, path, payload=None):
+    def make_request(self, method, path, payload=None, token=''):
         data = json.dumps(payload)
         client = self.client
-        kwargs = {'data': data, 'headers': self.get_api_headers()}
+        kwargs = {'data': data, 'headers': self.get_api_headers(token)}
         return {
             'POST': client.post,
             'GET': client.get,

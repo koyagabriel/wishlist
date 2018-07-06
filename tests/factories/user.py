@@ -8,4 +8,3 @@ class UserFactory(factory.mongoengine.MongoEngineFactory):
 
     username = factory.Faker('word', ext_word_list=None)
     password_hash = None
-    items = []

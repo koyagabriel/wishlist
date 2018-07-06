@@ -1,10 +1,12 @@
 from app import db
+from resources.models.base import BaseDocument
 
-class Item(db.EmbeddedDocument):
+class Item(BaseDocument):
     name = db.StringField(unique=True, required=True)
     link = db.StringField(required=True)
     price = db.FloatField(required=True)
     purchased = db.BooleanField(default=False)
+    user_id = db.StringField(required=True)
 
 
     @property
@@ -22,3 +24,5 @@ class Item(db.EmbeddedDocument):
     @property
     def is_purchased(self):
         return self.purchased
+
+        
