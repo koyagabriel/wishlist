@@ -6,7 +6,6 @@ from .base import BaseDocument
 class User(BaseDocument):
     username = db.StringField(unique=True, required=True)
     password_hash = db.StringField(required=True)
-    items = db.EmbeddedDocumentListField(Item)
 
     @property
     def get_username(self):

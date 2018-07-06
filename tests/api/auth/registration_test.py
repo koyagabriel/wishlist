@@ -20,7 +20,7 @@ class RegistrationTestCase(BaseTestCase):
         # Assert
         self.assertTrue(response.status_code == 200)
         self.assertTrue(json_response['message'] == "Successfully Registered")
-    
+
 
     def test_registration_with_password_mismatch(self):
         # Arrange
@@ -38,4 +38,3 @@ class RegistrationTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertTrue(json_response['message'] == "Password mismatch")
         self.assertFalse(json_response['success'])
-

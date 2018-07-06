@@ -7,7 +7,7 @@ from api.utils import respond_to_json
 class Auth:
 
     @staticmethod
-    def _generate_token(payload):
+    def generate_token(payload):
         serializer = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
         return serializer.dumps(payload).decode(encoding='ascii')
 
@@ -42,10 +42,10 @@ class Auth:
         user = User.post(params)
 
         if user:
-            token = cls._generate_token({"username": user.username,
+            token = cls.generate_token({"username": user.username,
                                          "id": user.get_id})
 
-        return respond_to_json(message="Successfully Registered", 
+        return respond_to_json(message="Successfully Registered",
                               data={"username": user.username, "token": token})
 
 
@@ -63,7 +63,7 @@ class Auth:
                                    message="Invalid Credentials",
                                    status=401)
 
-        token = cls._generate_token({"username": user.username, "id": user.get_id})
+        token = cls.generate_token({"username": user.username, "id": user.get_id})
 
-        return respond_to_json(message='login successful', 
+        return respond_to_json(message='login successful',
                                data={"username": user.username, "token": token})
